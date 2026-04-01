@@ -1,4 +1,4 @@
-# cartogram.advisor
+# cartogram_advisor
 
 R package to test whether a spatial variable is extensive (scales with area) or intensive (does not). Intended as a guardrail for cartogram construction — area cartograms should only be used with extensive variables.
 
@@ -6,10 +6,10 @@ R package to test whether a spatial variable is extensive (scales with area) or 
 
 ```r
 # From the repo root:
-devtools::install("cartogram.advisor")
+devtools::install("cartogram_advisor")
 
 # Or load without installing:
-devtools::load_all("cartogram.advisor")
+devtools::load_all("cartogram_advisor")
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ The input is an `sf` object with a numeric variable column and a population colu
 
 ```r
 library(sf)
-library(cartogram.advisor)
+library(cartogram_advisor)
 
 # Load your spatial data (must be an sf object with a CRS)
 my_data <- st_read("my_regions.geojson")

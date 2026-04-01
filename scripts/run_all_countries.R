@@ -5,7 +5,7 @@ value_col <- if (exists(".run_value_col")) .run_value_col else "builtup_fraction
 population_col <- if (exists(".run_population_col")) .run_population_col else "pop_gpw"
 # ──────────────────────────────────────────────────────────────
 
-devtools::load_all("cartogram.advisor")
+devtools::load_all("cartogram_advisor")
 
 countries <- sort(unique(dat$country_code))
 n_countries <- length(countries)
