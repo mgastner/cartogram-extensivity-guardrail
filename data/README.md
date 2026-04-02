@@ -2,7 +2,7 @@
 
 ## admin1_all_variables.csv
 
-Subnational (admin-1) data for 3,591 administrative divisions. 40 columns: 5 identifiers, 1 population column, and 34 variables (17 intensive, 17 extensive).
+Subnational (admin-1) data for 3,591 administrative divisions. 40 columns: 5 identifiers, 1 population column, and 34 variables (17 extensive, 17 non-extensive).
 
 ### Identifiers
 
@@ -16,29 +16,6 @@ Subnational (admin-1) data for 3,591 administrative divisions. 40 columns: 5 ide
 | `pop_gpw` | GPW v4.11 population 2020 (927 m native resolution) |
 
 ### Variables
-
-#### Intensive (17)
-
-| Column | Unit | Source |
-|-|-|-|
-| `builtup_fraction` | 0–1 | Derived: builtup_km2 / area |
-| `cloud_fraction_mean` | 0–10000 | MODIS MOD08_M3 (2015–2020 mean) |
-| `elevation_mean_m` | Metres | SRTM GL1 |
-| `et_mean_mm_2020` | mm | MODIS MOD16A2GF 2020 |
-| `forest_fraction` | 0–1 | MODIS MCD12Q1 2020 (IGBP classes 1–5) |
-| `cropland_fraction` | 0–1 | MODIS MCD12Q1 2020 (IGBP classes 12, 14) |
-| `gdp_per_capita_2020` | PPP USD | Gridded GDP (Kummu et al.) |
-| `ndvi_mean_2020` | NDVI × 10000 | MODIS MOD13A2 2020 |
-| `nightlights_per_km2` | nW/cm²/sr per km² | Derived: nightlights_sum / area |
-| `pm25_annual_2019` | µg/m³ | Global Satellite PM2.5 (van Donkelaar et al.) |
-| `precip_annual_mm` | mm | WorldClim v1 BIO12 |
-| `ruggedness_mean` | Metres (std dev) | Terrain ruggedness from SRTM |
-| `soil_organic_carbon_g_per_kg` | g/kg | OpenLandMap SOC (0 cm depth) |
-| `temp_annual_mean_C` | °C | WorldClim v1 BIO1 |
-| `travel_time_to_city_min` | Minutes | Oxford MAP Accessibility to Cities 2015 |
-| `tree_cover_pct_2000` | % | Hansen Global Forest Change |
-| `urban_fraction` | 0–1 | MODIS MCD12Q1 2020 (IGBP class 13) |
-| `water_occurrence_pct` | % | JRC Global Surface Water |
 
 #### Extensive (17)
 
@@ -62,9 +39,32 @@ Subnational (admin-1) data for 3,591 administrative divisions. 40 columns: 5 ide
 | `urban_area_km2` | km² | Derived: urban_fraction × area |
 | `water_area_km2` | km² | Derived: water_occurrence_pct / 100 × area |
 
+#### Non-Extensive (17)
+
+| Column | Unit | Source |
+|-|-|-|
+| `builtup_fraction` | 0–1 | Derived: builtup_km2 / area |
+| `cloud_fraction_mean` | 0–10000 | MODIS MOD08_M3 (2015–2020 mean) |
+| `elevation_mean_m` | Metres | SRTM GL1 |
+| `et_mean_mm_2020` | mm | MODIS MOD16A2GF 2020 |
+| `forest_fraction` | 0–1 | MODIS MCD12Q1 2020 (IGBP classes 1–5) |
+| `cropland_fraction` | 0–1 | MODIS MCD12Q1 2020 (IGBP classes 12, 14) |
+| `gdp_per_capita_2020` | PPP USD | Gridded GDP (Kummu et al.) |
+| `ndvi_mean_2020` | NDVI × 10000 | MODIS MOD13A2 2020 |
+| `nightlights_per_km2` | nW/cm²/sr per km² | Derived: nightlights_sum / area |
+| `pm25_annual_2019` | µg/m³ | Global Satellite PM2.5 (van Donkelaar et al.) |
+| `precip_annual_mm` | mm | WorldClim v1 BIO12 |
+| `ruggedness_mean` | Metres (std dev) | Terrain ruggedness from SRTM |
+| `soil_organic_carbon_g_per_kg` | g/kg | OpenLandMap SOC (0 cm depth) |
+| `temp_annual_mean_C` | °C | WorldClim v1 BIO1 |
+| `travel_time_to_city_min` | Minutes | Oxford MAP Accessibility to Cities 2015 |
+| `tree_cover_pct_2000` | % | Hansen Global Forest Change |
+| `urban_fraction` | 0–1 | MODIS MCD12Q1 2020 (IGBP class 13) |
+| `water_occurrence_pct` | % | JRC Global Surface Water |
+
 ### Aggregation
 
-Intensive variables use **mean** reducers (spatial average across pixels). Extensive variables use **sum** reducers (total across pixels) at native raster resolution where possible. Population, nightlights, burned area, built-up surface, and built-up volume are computed at native resolution. Other extensive variables are derived from intensive × area.
+Extensive variables use **sum** reducers (total across pixels) at native raster resolution where possible. Non-extensive variables use **mean** reducers (spatial average across pixels). Population, nightlights, burned area, built-up surface, and built-up volume are computed at native resolution. Other extensive variables are derived from multiplying intensive (i.e., non-extensive and independent of system size) × area.
 
 ### Sources
 
@@ -81,4 +81,4 @@ Intensive variables use **mean** reducers (spatial average across pixels). Exten
 
 ## world_bank_boundaries_simplified.geojson
 
-Admin-1 boundary polygons (simplified) from the World Bank. Used for spatial joins and map visualisation. Each feature has an `ADM1CD_c` field that matches `adm_div_code` in the CSV.
+Admin-1 boundary polygons. The coordinates are derived from the [World Bank](https://datacatalogfiles.worldbank.org/ddh-published/0038272/5/DR0095369/World Bank Official Boundaries (GeoJSON)/World Bank Official Boundaries - Admin 1.geojson) (accessed on 2026-03-09) through polyline simplification. Used for spatial joins and map visualisation. Each feature has an `ADM1CD_c` field that matches `adm_div_code` in the CSV.
