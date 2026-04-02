@@ -43,7 +43,7 @@ Subnational (admin-1) data for 3,591 administrative divisions. 40 columns: 5 ide
 
 | Column | Unit | Source |
 |-|-|-|
-| `builtup_fraction` | 0–1 | Derived: builtup_km2 / area |
+| `builtup_fraction` | 0–1 | Derived: builtup_km2_2020 / area |
 | `cloud_fraction_mean` | 0–10000 | MODIS MOD08_M3 (2015–2020 mean) |
 | `elevation_mean_m` | Metres | SRTM GL1 |
 | `et_mean_mm_2020` | mm | MODIS MOD16A2GF 2020 |
@@ -51,7 +51,7 @@ Subnational (admin-1) data for 3,591 administrative divisions. 40 columns: 5 ide
 | `cropland_fraction` | 0–1 | MODIS MCD12Q1 2020 (IGBP classes 12, 14) |
 | `gdp_per_capita_2020` | PPP USD | Gridded GDP (Kummu et al.) |
 | `ndvi_mean_2020` | NDVI × 10000 | MODIS MOD13A2 2020 |
-| `nightlights_per_km2` | nW/cm²/sr per km² | Derived: nightlights_sum / area |
+| `nightlights_per_km2` | nW/cm²/sr per km² | Derived: nightlights_sum_2020 / area |
 | `pm25_annual_2019` | µg/m³ | Global Satellite PM2.5 (van Donkelaar et al.) |
 | `precip_annual_mm` | mm | WorldClim v1 BIO12 |
 | `ruggedness_mean` | Metres (std dev) | Terrain ruggedness from SRTM |
