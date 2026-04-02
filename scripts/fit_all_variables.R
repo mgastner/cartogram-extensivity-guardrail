@@ -1,8 +1,24 @@
-# Run all variables through the scaling evidence pipeline
+# fit_all_variables.R — Fit area-scaling GAMs
+# for all 34 benchmark variables
 #
-# This script loops over all 34 variables and sources
-# run_all_countries.R for each one.
+# Usage:
+#   Rscript scripts/fit_all_variables.R
 
+library(dplyr)
+library(readr)
+
+# Source analysis functions
+r_files <- sort(fs::dir_ls("R", glob = "*.R"))
+purrr::walk(r_files, source)
+source("scripts/fit_single_variable.R")
+
+# Load data
+dat <- read_csv(
+  "data/admin1_all_variables.csv",
+  show_col_types = FALSE
+)
+
+# ── 34 benchmark variables ──────────────────────────
 all_variables <- c(
   "builtup_fraction",
   "builtup_km2_2020",
@@ -40,14 +56,15 @@ all_variables <- c(
   "water_occurrence_pct"
 )
 
+# ── Fit all variables ───────────────────────────────
 cli::cli_alert_info(
-  "Running {length(all_variables)} variables"
+  "Fitting {length(all_variables)} variables"
 )
 batch_start <- Sys.time()
 
 purrr::walk(all_variables, \(v) {
   cli::cli_h2(v)
-  run_all_countries(
+  fit_single_variable(
     value_col      = v,
     population_col = "pop_gpw",
     dat            = dat

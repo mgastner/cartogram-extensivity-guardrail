@@ -1,10 +1,11 @@
-# Run scaling evidence extraction for all countries
+# fit_single_variable.R — Fit area-scaling GAMs
+# for one variable across all countries
 #
-# Fits the area-scaling GAM to every country and saves
-# results as a CSV.
-run_all_countries <- function(value_col,
-                              population_col,
-                              dat) {
+# Saves per-country results as a single CSV in
+# results/.
+fit_single_variable <- function(value_col,
+                                population_col,
+                                dat) {
   countries <- sort(unique(dat$country_code))
   results <- purrr::map(
     cli::cli_progress_along(
