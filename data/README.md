@@ -12,7 +12,7 @@ Subnational (admin-1) data for 3,591 administrative divisions. 40 columns: 5 ide
 | `country_name` | Country name |
 | `adm_div_name` | Administrative division name |
 | `adm_div_code` | World Bank admin-1 code |
-| `area` | Area in km² (equal-area projection) |
+| `area_km2` | Area in km² (equal-area projection) |
 | `pop_gpw` | GPW v4.11 population 2020 (927 m native resolution) |
 
 ### Variables
