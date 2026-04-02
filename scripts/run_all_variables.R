@@ -1,7 +1,7 @@
-# ── Run all variables through the scaling evidence pipeline ───
+# Run all variables through the scaling evidence pipeline
+#
 # This script loops over all 34 variables and sources
 # run_all_countries.R for each one.
-# ──────────────────────────────────────────────────────────────
 
 all_variables <- c(
   "builtup_fraction",
@@ -40,16 +40,24 @@ all_variables <- c(
   "water_occurrence_pct"
 )
 
-cat(sprintf("Running %d variables\n\n", length(all_variables)))
+cli::cli_alert_info(
+  "Running {length(all_variables)} variables"
+)
 batch_start <- Sys.time()
 
-for (v in all_variables) {
-  .run_value_col <- v
-  .run_population_col <- "pop_gpw"
-  cat(sprintf("\n════ %s ════\n", v))
-  source("scripts/run_all_countries.R", local = FALSE)
-}
+purrr::walk(all_variables, \(v) {
+  cli::cli_h2(v)
+  run_all_countries(
+    value_col      = v,
+    population_col = "pop_gpw",
+    dat            = dat
+  )
+})
 
-batch_elapsed <- round(as.numeric(difftime(Sys.time(), batch_start, units = "mins")), 1)
-cat(sprintf("\n\nAll %d variables complete — total time: %.1f min\n",
-            length(all_variables), batch_elapsed))
+batch_elapsed <- round(as.numeric(difftime(
+  Sys.time(), batch_start, units = "mins"
+)), 1)
+cli::cli_alert_success(stringr::str_c(
+  "All {length(all_variables)} variables",
+  " complete \u2014 {batch_elapsed} min"
+))
