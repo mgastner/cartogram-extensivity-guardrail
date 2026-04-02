@@ -1,2 +1,10 @@
 data/README.html
 data/README_files/
+results/
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj
+renv/library/
+renv/staging/
+renv/sandbox/
